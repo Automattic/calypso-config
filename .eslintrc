@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    "jest"
+  ],
+  "extends": [
+    "wpcalypso"
+  ],
+  "env": {
+    "node": true,
+    "jest/globals": true
+  }
+}

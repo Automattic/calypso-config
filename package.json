@@ -1,0 +1,27 @@
+{
+  "name": "@automattic/calypso-config",
+  "version": "1.0.0",
+  "description": "Simple server and client config module. Originally written for wp-calypso.",
+  "main": "index.js",
+  "directories": {
+    "test": "__tests__"
+  },
+  "scripts": {
+    "lint": "eslint src __tests__",
+    "test": "jest"
+  },
+  "author": "Automattic",
+  "homepage": "https://github.com/Automattic/wp-calypso",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Automattic/calypso-config.git" },
+  "license": "GPL-2.0+",
+  "devDependencies": {
+    "chalk": "1.0.0",
+    "eslint": "3.8.1",
+    "eslint-config-wpcalypso": "2.0.0",
+    "eslint-plugin-jest": "21.2.0",
+    "eslint-plugin-wpcalypso": "3.4.1",
+    "jest": "22.0.3"
+  }
+}
