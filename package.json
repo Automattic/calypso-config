@@ -2,7 +2,7 @@
   "name": "@automattic/calypso-config",
   "version": "1.0.0",
   "description": "Simple server and client config module. Originally written for wp-calypso.",
-  "main": "index.js",
+  "main": "src/index.js",
   "directories": {
     "test": "__tests__"
   },

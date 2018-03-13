@@ -2,12 +2,16 @@
 
 This library can be used for managing server- and client-side configs.
 
-All configs are stored in `.json` files (see examples in `sample-config`). At boot-up time, the server decides which config file to use based on the `NODE_ENV` environment variable. The default value is `"development"`. For values shared across environments, add them to the `_shared.json` file. The entire configuration is available on the server-side and most keys are also exposed to the client.
+All configs are stored in `.json` files (see examples in `sample-config`). The path to where these files are stored needs to be specified via the `CALYPSO_CONFIG_PATH` environment variable.
+
+At boot-up time, the server decides which config file to use based on the `NODE_ENV` environment variable. The default value is `"development"`. For values shared across environments, add them to the `_shared.json` file. The entire configuration is available on the server-side and certain keys can be exposed to the client.
+
+## Server-side Usage
 
 Config values can be retrieved by invoking the `config()` exported function with the desired key name:
 
 ```js
-import config from 'config';
+import config from '@automattic/calypso-config';
 console.log( config( 'redirect_uri' ) );
 ```
 
@@ -18,7 +22,7 @@ To access `config` values on the client-side, add the property name to the `clie
 A global `configData` object must also be output during the initial render. Here's an example using React:
 
 ```js
-import config from 'calypso-config';
+import { clientData } from '@automattic/calypso-config';
 
 class Document extends React.Component {
 	render() {
@@ -28,7 +32,7 @@ class Document extends React.Component {
 			<script
 				type="text/javascript"
 				dangerouslySetInnerHTML={ {
-					__html: `var configData = ${ JSON.stringify( config.clientData ) };`
+					__html: `var configData = ${ JSON.stringify( clientData ) };`
 				} }
 			/>
 
