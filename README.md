@@ -65,7 +65,6 @@ ENABLE_FEATURES=manage/plugins/compatibility-warning DISABLE_FEATURES=code-split
 
 ### Testing Feature Flags via URLs
 
-// TODO: does this work?
 If you want to temporarily enable/disable some feature flags you can add a `?flags=` query parameter to the URL.
 
 **Note** that this **only** works on development, staging, and calypso.live, **not** in production (this functionality is not suitable for public use on `*.wordpress.com`).
