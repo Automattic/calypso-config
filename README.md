@@ -2,9 +2,11 @@
 
 This library can be used for managing server- and client-side configs.
 
-All configs are stored in `.json` files (see examples in `sample-config`). The path to where these files are stored needs to be specified via the `CALYPSO_CONFIG_PATH` environment variable.
+All configs are stored in `.json` files (see examples in `sample-config`) in a `config` folder in your working directory. This path can be overridden via the `CALYPSO_CONFIG_PATH` environment variable.
 
-At boot-up time, the server decides which config file to use based on the `NODE_ENV` environment variable. The default value is `"development"`. For values shared across environments, add them to the `_shared.json` file. The entire configuration is available on the server-side and certain keys can be exposed to the client.
+At boot-up time, the server decides which config file to use based on the `NODE_ENV` environment variable. The default value is `development`. For values shared across environments, add them to the `_shared.json` file. Local-only values can be added via a `{environment}.local.json` file (e.g. `development.local.json`).
+
+The entire configuration is available on the server-side and certain keys can be exposed to the client.
 
 ## Server-side Usage
 
