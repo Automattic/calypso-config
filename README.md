@@ -19,29 +19,62 @@ console.log( config( 'redirect_uri' ) );
 
 ## Client-side Usage
 
-To access `config` values on the client-side, add the property name to the `client.json` file, which is whitelist of config properties that will be exposed to the client.
+To access `config` values on the client-side, add the property name to the `client.json` file, which is a whitelist of `config` properties that will be exposed to the client.
 
-A global `configData` object must also be output during the initial render. Here's an example using React:
+A global `configData` object must also be output during the initial render. Here's an example using webpack and the interpolate
+
+In your webpack build config:
 
 ```js
-import { clientData } from '@automattic/calypso-config';
+const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
+const InterpolateHtmlPlugin = require( 'react-dev-utils/InterpolateHtmlPlugin' );
 
-class Document extends React.Component {
-	render() {
-		return (
-			// ...
+const clientData = require( '@automattic/calypso-config' ).clientData;
 
-			<script
-				type="text/javascript"
-				dangerouslySetInnerHTML={ {
-					__html: `var configData = ${ JSON.stringify( clientData ) };`
-				} }
-			/>
+// ...
 
-			// ...
-		)
-	}
+const interpolateHtmlData = Object.assign( {}, {
+	CALYPSO_CONFIG_DATA_AS_JSON: JSON.stringify( clientData ),
+} );
+
+// ...
+
+module.exports = {
+	// ...
+
+	plugins: [
+		new InterpolateHtmlPlugin( interpolateHtmlData ),
+
+		new HtmlWebpackPlugin( {
+			inject: true,
+			template: '/path/to/index.html',
+		} ),
+	],
+
+	// ...
 }
+
+```
+
+Then, in your `index.html` template:
+
+```html
+<html>
+  <head>
+  ...
+  <script>var configData = %CALYPSO_CONFIG_DATA_AS_JSON%;</script>
+  ...
+  </head>
+</html>
+```
+
+And finally, to access the configs:
+
+```js
+import config from '@automattic/calypso-config/client';
+
+console.log( config( 'redirect_uri' ) );
+console.log( config.isEnabled( 'secret-features' ) );
 ```
 
 ## Feature Flags
