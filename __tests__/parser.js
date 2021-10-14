@@ -35,10 +35,11 @@ describe( 'parser', () => {
 		expect( data ).toHaveProperty( 'myenv_override', 'myenv' );
 		expect( data ).toHaveProperty( 'myenvlocal_override', 'myenvlocal' );
 		expect( data ).toHaveProperty( 'features', {
-			enabledFeature1: true,
+			enabledFeature1: false,
 			enabledFeature2: true,
 			disabledFeature1: false,
 			disabledFeature2: false,
+			enabledFeature3: true,
 		} );
 	} );
 

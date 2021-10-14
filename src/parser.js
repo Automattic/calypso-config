@@ -31,7 +31,14 @@ module.exports = function( configPath, defaultOpts ) {
 		disabledFeatures = opts.disabledFeatures ? opts.disabledFeatures.split( ',' ) : [];
 
 	configFiles.forEach( function( file ) {
-		Object.assign( data, getDataFromFile( file ) );
+		const fileData = getDataFromFile( file );
+		const features = Object.assign( data.features || {}, fileData.features || {} );
+
+		Object.assign( data, fileData );
+
+		if ( fileData.hasOwnProperty( 'features' ) ) {
+			data.features = features;
+		}
 	} );
 
 	if ( data.hasOwnProperty( 'features' ) ) {
