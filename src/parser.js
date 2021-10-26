@@ -18,7 +18,6 @@ module.exports = function( configPath, defaultOpts ) {
 	let opts = Object.assign( {
 			env: 'development',
 		}, defaultOpts ),
-		data = {},
 		configFiles = [
 			path.resolve( configPath, '_shared.json' ),
 			path.resolve( configPath, opts.env + '.json' ),
@@ -30,9 +29,17 @@ module.exports = function( configPath, defaultOpts ) {
 		enabledFeatures = opts.enabledFeatures ? opts.enabledFeatures.split( ',' ) : [],
 		disabledFeatures = opts.disabledFeatures ? opts.disabledFeatures.split( ',' ) : [];
 
-	configFiles.forEach( function( file ) {
-		Object.assign( data, getDataFromFile( file ) );
-	} );
+	const data = configFiles.reduce( ( combinedData, file ) => {
+		const fileData = getDataFromFile( file );
+		const features = Object.assign( {}, combinedData.features );
+		const mergedData = Object.assign( combinedData, fileData );
+
+		if ( fileData.hasOwnProperty( 'features' ) ) {
+			mergedData.features = Object.assign( features, fileData.features );
+		}
+
+		return mergedData;
+	}, {} );
 
 	if ( data.hasOwnProperty( 'features' ) ) {
 		enabledFeatures.forEach( function( feature ) {

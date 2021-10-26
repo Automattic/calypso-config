@@ -37,6 +37,10 @@ function setValidEnvFiles() {
 			myenv_only: 'myenv',
 			myenv_override: 'myenv',
 			myenvlocal_override: 'myenv',
+			features: {
+				enabledFeature3: true,
+				enabledFeature1: false,
+			}
 		} ),
 		'myenv.local.json': toJSON( {
 			myenvlocal_only: 'myenvlocal',
