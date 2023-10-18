@@ -23,7 +23,9 @@ module.exports = url => {
 		);
 	}
 
-	applyUrlOverrides( url, configData );
+	if ( url ) {
+		applyUrlOverrides( url, configData );
+	}
 
 	const configApi = createConfig( configData );
 
