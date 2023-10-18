@@ -82,12 +82,12 @@ console.log( config.isEnabled( 'secret-features' ) );
 To support SSR and CSR using the same code, use the `@automattic/calypso-config/universal` module. This module works the exact same as `@automattic/calypso-config/client` except that it will load the client data from the file system if it isn't running in the browser.
 
 ```js
-import universalConfig from '@automattic/calypso-config/universal';
+import universalConfig from '@automattic/calypso-config/universal-client';
 
-const { config, isEnabled } = universalConfig( url );
+const config = universalConfig( url );
 
 console.log( config( 'redirect_uri' ) );
-console.log( isEnabled( 'secret-features' ) );
+console.log( config.isEnabled( 'secret-features' ) );
 ```
 
 ## Feature Flags
