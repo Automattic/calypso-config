@@ -84,10 +84,10 @@ To support SSR and CSR using the same code, use the `@automattic/calypso-config/
 ```js
 import universalConfig from '@automattic/calypso-config/universal-client';
 
-const config = universalConfig( url );
+const { config, isEnabled } = universalConfig( url );
 
 console.log( config( 'redirect_uri' ) );
-console.log( config.isEnabled( 'secret-features' ) );
+console.log( isEnabled( 'secret-features' ) );
 ```
 
 ## Feature Flags
