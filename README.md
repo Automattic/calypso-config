@@ -77,6 +77,19 @@ console.log( config( 'redirect_uri' ) );
 console.log( config.isEnabled( 'secret-features' ) );
 ```
 
+## Universal Usage
+
+To support SSR and CSR using the same code, use the `@automattic/calypso-config/universal` module. This module works the exact same as `@automattic/calypso-config/client` except that it will load the client data from the file system if it isn't running in the browser.
+
+```js
+import universalConfig from '@automattic/calypso-config/universal';
+
+const { config, isEnabled } = universalConfig( url );
+
+console.log( config( 'redirect_uri' ) );
+console.log( isEnabled( 'secret-features' ) );
+```
+
 ## Feature Flags
 
 The config files contain a features object that can be used to determine whether to enable a feature for certain environments. This allows us to merge in-progress features without launching them to production. The config module adds a method to detect this: `config.isEnabled()`. Please make sure to add new feature flags alphabetically so they are easy to find.
