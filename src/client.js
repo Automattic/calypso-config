@@ -5,6 +5,7 @@
  */
 
 const createConfig = require( './create-config' );
+const { applyUrlOverrides } = require( './overrides' );
 
 /**
  * Manages config flags for various deployment builds
@@ -15,31 +16,7 @@ if ( 'undefined' === typeof window || ! window.configData ) {
 	);
 }
 
-const configData = window.configData;
-
-if (
-	process.env.NODE_ENV === 'development' ||
-	configData.env_id === 'stage' ||
-	( window && window.location.href.indexOf( 'https://calypso.live' ) === 0 )
-) {
-	const match =
-		document.location.search && document.location.search.match( /[?&]flags=([^&]+)(&|$)/ );
-	if ( match ) {
-		const flags = match[ 1 ].split( ',' );
-		flags.forEach( flagRaw => {
-			const flag = flagRaw.replace( /^[-+]/, '' );
-			const enabled = ! /^-/.test( flagRaw );
-			configData.features[ flag ] = enabled;
-			console.log(
-				// eslint-disable-line no-console
-				'%cConfig flag %s via URL: %s',
-				'font-weight: bold;',
-				enabled ? 'enabled' : 'disabled',
-				flag
-			);
-		} );
-	}
-}
+const configData = applyUrlOverrides( window.location.href, window.configData );
 
 const configApi = createConfig( configData );
 
