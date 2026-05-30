@@ -3,7 +3,7 @@
  */
 const path = require( 'path' );
 
-const fs = jest.genMockFromModule( 'fs' );
+const fs = jest.createMockFromModule( 'fs' );
 let mockFiles = {};
 
 function toJSON( val ) {
