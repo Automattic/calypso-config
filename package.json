@@ -23,6 +23,6 @@
     "eslint-config-wpcalypso": "2.0.0",
     "eslint-plugin-jest": "21.2.0",
     "eslint-plugin-wpcalypso": "3.4.1",
-    "jest": "22.0.3"
+    "jest": "30.4.2"
   }
 }
