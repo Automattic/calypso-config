@@ -8,5 +8,4 @@ describe( 'config', () => {
 		expect( config ).toHaveProperty( 'serverData' );
 		expect( config ).toHaveProperty( 'clientData' );
 	} );
-
 });
